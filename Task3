@@ -1,0 +1,83 @@
+--Task 3 
+
+Part 1- Passwordless ssh between two linux servers
+
+1. Created two new Linux VMs in Azure namely:
+	Linux1
+	Linux2
+
+2. Configured passwordless ssh from Linux1 to Linux2 - steps below:
+
+	a. Connected (ssh) to Linux1 using putty 
+	b. Generated a public/private key pair by executing the following command:
+
+		#ssh-keygen -t rsa
+
+	c. Saved generated key in the default location
+	
+	d. Connected (ssh) to Linux2 using putty
+	e. Copied over the public key to .ssh/authorized_keys on LinuxTwo by executing the following:
+		from home directory:
+
+		i.   #vi  .ssh/authorized_keys --to open 'authorized_keys' file in edit mode 
+		ii.  copied and pasted the public key 
+		iii. save file (wq)
+	
+	f. Ensured I had read/write permission on .ssh/authorized_keys - executed the following command
+		#chmod 600 .ssh/authorized_keys
+
+
+3. Test connectivity from Linux1 to Linux2
+	#ssh Linux2 --successful
+
+4. Repeated step 2 to setup passwordless ssh from Linux2 to Linux1
+
+5. Test connectivity from Linux2 to Linux1
+	#ssh Linux1 --successful
+
+	
+Part 2 - Install the MySQL server on Linux1
+
+1. Executed the following command on Linux1:
+	#sudo apt-get update
+	#sudo apt-get install mysql-server
+
+2. Enabled remote access to Linux1
+ 
+	#sudo ufw allow mysql
+	#sudo ufw allow from <Linux1 ip address here> to any port 3306
+	#vi /etc/mysql/mysql.conf.d/mysqld.cnf -- to view the bind address
+	#Change the bind address to 0.0.0.0
+	
+
+3. Restarted mysql service
+
+	#systemctl restart mysql.service
+
+4. Configure MySQL user (utest) to allow access from any host to Linux1
+	
+	#Connected to mysql using root account viz mysql -u root -p
+	#CREATE USER 'utest'@'%' IDENTIFIED BY 'passwordhere';
+	
+5. Created wordpress database on Linux1
+	#Create database wordpressdb
+
+6. Granted access to all databases on Linux1 to utest
+	#GRANT ALL PRIVILEGES ON *.* TO utest@'%' 
+
+Part 3 - install mysql client on Linux2
+
+1. Executed the following
+
+	#sudo apt-get install mysql-client
+
+Part 4 - Test connectivity from mysql client on Linux2 to mysql server on Linux1
+	#princeg@Linux2:~$ mysql -u utest -h <ipaddress of Linux1> -p 
+
+	#Connectivity successful
+
+
+
+
+
+
