@@ -1,0 +1,20 @@
+1) Amend my python script called 'app.py' in the following location:
+
+/home/ubuntu/goa/Python-Sample-Application/app.py
+
+2) Create a service file with the .service extention called "uber_app_service.service" in the following location:
+
+/lib/systemd/system
+
+3) Enable newly added service by running the following command
+
+sudo systemctl daemon-reload 
+
+4) Enable the service to start on system boot, also start the service using the following commands:
+
+sudo systemctl enable uber_app_service.service
+sudo systemctl start uber_app_service.service
+
+5) Check the status of your service
+
+sudo systemctl status uber_app_service.service
