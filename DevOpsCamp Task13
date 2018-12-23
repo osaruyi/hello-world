@@ -18,3 +18,9 @@ sudo systemctl start uber_app_service.service
 5) Check the status of your service
 
 sudo systemctl status uber_app_service.service
+
+
+
+Error received:
+uber_app_service.service: Failed to set up standard input: Inappropriate ioctl for device
+uber_app_service.service: Failed at step STDIN spawning /usr/bin/python: Inappropriate ioctl for device
