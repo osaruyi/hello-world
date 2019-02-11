@@ -27,7 +27,7 @@ Commands
 1. cd /tmp
 2. sudo wget http://wordpress.org/latest.zip
 3. sudo chown -R www-data:www-data /var/www/html/wordpress
-4. sudo chmod _R 755 /var/www/html/wordpress
+4. sudo chmod -R 755 /var/www/html/wordpress
 5. mkdir -p /var/www/html/wordpress/wp-content/uploads
 6. chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads
 
